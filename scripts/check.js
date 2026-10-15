@@ -18,7 +18,6 @@ function command(command, args) {
   const result = cp.spawnSync(command, args, {
     cwd: root,
     encoding: "utf8",
-    shell: isWindows,
     windowsHide: true,
   });
   return {
