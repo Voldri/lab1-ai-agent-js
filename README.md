@@ -63,4 +63,33 @@ lab1-ai-agent-js/
 ## Документація
 
 - [Архітектура агента](docs/architecture.md)
+- [Інструкція із запуску](docs/usage.md)
 - [Журнал взаємодії з AI](docs/ai-log.md)
+
+## Запуск зібраного проєкту
+
+### Windows (PowerShell)
+
+```powershell
+npm ci
+npm start
+npm test
+.\ci.bat
+.\build\hello.exe
+npm run check
+```
+
+Очікувані результати: `CI OK`, `Hello, World!` і `CHECK PASSED: 11/11`.
+
+### Linux/macOS
+
+```bash
+npm ci
+npm start
+npm test
+bash ci.sh
+./build/hello
+npm run check
+```
+
+Очікувані результати: `CI OK`, `Hello, World!` і `CHECK PASSED: 11/11`.
