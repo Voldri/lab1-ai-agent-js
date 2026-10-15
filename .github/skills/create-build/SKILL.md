@@ -1,8 +1,8 @@
 ---
-description: "Налаштовує збірку, Jest і локальний CI через skill build-and-test."
-agent: build-engineer
+name: create-build
+description: Налаштовує збірку, Jest і локальний CI через skill build-and-test.
+disable-model-invocation: true
 ---
-
 # create-build
 
 ## Передумови

@@ -34,17 +34,22 @@ lab1-ai-agent-js/
 ├── .github/
 │   ├── agents/
 │   │   └── build-engineer.agent.md
-│   ├── prompts/
-│   │   ├── check.prompt.md
-│   │   ├── create-actions.prompt.md
-│   │   ├── create-build.prompt.md
-│   │   ├── create-project.prompt.md
-│   │   ├── git-init.prompt.md
-│   │   └── init.prompt.md
 │   └── skills/
 │       ├── build-and-test/
 │       │   └── SKILL.md
+│       ├── check/
+│       │   └── SKILL.md
+│       ├── create-actions/
+│       │   └── SKILL.md
+│       ├── create-build/
+│       │   └── SKILL.md
+│       ├── create-project/
+│       │   └── SKILL.md
 │       ├── github-actions/
+│       │   └── SKILL.md
+│       ├── git-init/
+│       │   └── SKILL.md
+│       ├── init/
 │       │   └── SKILL.md
 │       └── project-scaffold/
 │           └── SKILL.md

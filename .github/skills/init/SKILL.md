@@ -1,8 +1,8 @@
 ---
-description: "Оркеструє п'ять команд build-engineer у визначеному порядку."
-agent: build-engineer
+name: init
+description: Оркеструє п'ять команд build-engineer у визначеному порядку.
+disable-model-invocation: true
 ---
-
 # init
 
 ## Передумови
@@ -13,17 +13,17 @@ agent: build-engineer
 
 ## Дії
 
-Для кожного кроку прочитайте відповідний prompt file і виконайте його розділ **«Дії»** строго в такому порядку. Перед кожним кроком виводьте точний заголовок:
+Для кожного кроку прочитайте відповідний command-skill і виконайте його розділ **«Дії»** строго в такому порядку. Перед кожним кроком виводьте точний заголовок:
 
-1. `== [1/5] git-init ==` — `.github/prompts/git-init.prompt.md`
-2. `== [2/5] create-project ==` — `.github/prompts/create-project.prompt.md`
-3. `== [3/5] create-build ==` — `.github/prompts/create-build.prompt.md`
-4. `== [4/5] create-actions ==` — `.github/prompts/create-actions.prompt.md`
-5. `== [5/5] check ==` — `.github/prompts/check.prompt.md`
+1. `== [1/5] git-init ==` — `.github/skills/git-init/SKILL.md`
+2. `== [2/5] create-project ==` — `.github/skills/create-project/SKILL.md`
+3. `== [3/5] create-build ==` — `.github/skills/create-build/SKILL.md`
+4. `== [4/5] create-actions ==` — `.github/skills/create-actions/SKILL.md`
+5. `== [5/5] check ==` — `.github/skills/check/SKILL.md`
 
 Наступний крок запускайте лише якщо попередній завершився без `FAILED`. Передавайте результати далі: `src/hello.js` → `create-build`, `ci.sh`/`ci.bat` → `create-actions`, усі результати → `check`. При помилці зупиніться, не приховуйте її, не виправляйте тест або check і виведіть `INIT FAILED на кроці N (<назва>): <причина>`.
 
-У VS Code є вбудована команда `/init`, яка генерує `copilot-instructions.md`. Тому запускайте саме цю команду з українським описом або повідомленням: `Виконай команду init з файлу .github/prompts/init.prompt.md`.
+У VS Code є вбудована команда `/init`, яка генерує `copilot-instructions.md`. Тому запускайте саме цю команду з українським описом або повідомленням: `Виконай команду init з файлу .github/skills/init/SKILL.md`.
 
 ## Очікувані файли
 
@@ -31,7 +31,7 @@ agent: build-engineer
 
 ## Команди перевірки
 
-Виконуйте команди перевірки з кожного з п'яти prompt-файлів. Фінальний статус OK можливий лише коли `check` повернув `CHECK PASSED`.
+Виконуйте команди перевірки з кожного з п'яти command-skills. Фінальний статус OK можливий лише коли `check` повернув `CHECK PASSED`.
 
 ## Повідомлення про помилку
 

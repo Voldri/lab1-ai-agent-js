@@ -25,7 +25,7 @@ tools: ['edit', 'search', 'execute/runInTerminal', 'execute/getTerminalOutput', 
 - `build-and-test` — npm scripts, функція `add`, тест `BasicAddition`, локальна збірка і перевірки;
 - `github-actions` — workflow для трьох операційних систем.
 
-**Commands** (файли `.github/prompts/<назва>.prompt.md`):
+**Commands** (файли `.github/skills/<назва>/SKILL.md`):
 
 `git-init`, `create-project`, `create-build`, `create-actions`, `check`, `init`.
 

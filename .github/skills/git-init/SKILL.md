@@ -1,8 +1,8 @@
 ---
-description: "Перевіряє Git-репозиторій, гілку та ідемпотентно оновлює .gitignore."
-agent: build-engineer
+name: git-init
+description: Перевіряє Git-репозиторій, гілку та ідемпотентно оновлює .gitignore.
+disable-model-invocation: true
 ---
-
 # git-init
 
 ## Передумови

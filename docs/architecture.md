@@ -18,12 +18,12 @@
 
 | Command | Передумови | Результат |
 |---|---|---|
-| `git-init` | `.github/prompts/git-init.prompt.md`; Git-репозиторій | Перевірено репозиторій і гілку, ідемпотентно оновлено `.gitignore`, показано `git status` |
-| `create-project` | `.github/prompts/create-project.prompt.md`; успішний `git-init`, Node.js >= 20 | Виконано `project-scaffold` для JavaScript-проєкту `hello` |
-| `create-build` | `.github/prompts/create-build.prompt.md`; `src/hello.js` | Виконано `build-and-test`, локальну збірку та перевірено `CI OK` |
-| `create-actions` | `.github/prompts/create-actions.prompt.md`; локальний `CI OK` | Виконано `github-actions` і YAML-перевірку workflow |
-| `check` | `.github/prompts/check.prompt.md`; готовий проєкт | `scripts/check.js` без змін у проєкті звітує про всі структурні, тестові, build, workflow та security-перевірки |
-| `init` | `.github/prompts/init.prompt.md`; агент `build-engineer`, гілка `feature/...` | Оркеструє п'ять commands у порядку `git-init` → `create-project` → `create-build` → `create-actions` → `check` |
+| `git-init` | `.github/skills/git-init/SKILL.md`; Git-репозиторій | Перевірено репозиторій і гілку, ідемпотентно оновлено `.gitignore`, показано `git status` |
+| `create-project` | `.github/skills/create-project/SKILL.md`; успішний `git-init`, Node.js >= 20 | Виконано `project-scaffold` для JavaScript-проєкту `hello` |
+| `create-build` | `.github/skills/create-build/SKILL.md`; `src/hello.js` | Виконано `build-and-test`, локальну збірку та перевірено `CI OK` |
+| `create-actions` | `.github/skills/create-actions/SKILL.md`; локальний `CI OK` | Виконано `github-actions` і YAML-перевірку workflow |
+| `check` | `.github/skills/check/SKILL.md`; готовий проєкт | `scripts/check.js` без змін у проєкті звітує про всі структурні, тестові, build, workflow та security-перевірки |
+| `init` | `.github/skills/init/SKILL.md`; агент `build-engineer`, гілка `feature/...` | Оркеструє п'ять commands у порядку `git-init` → `create-project` → `create-build` → `create-actions` → `check` |
 
 ## Дані між етапами
 
@@ -44,8 +44,7 @@
 | Файл або каталог | Роль |
 |---|---|
 | `.github/agents/build-engineer.agent.md` | Manifest custom agent із роллю, правилами та доступними інструментами |
-| `.github/prompts/*.prompt.md` | Визначення commands агента: `git-init`, `create-project`, `create-build`, `create-actions`, `check`, `init` |
-| `.github/skills/*/SKILL.md` | Інструкції skills: `project-scaffold`, `build-and-test`, `github-actions` |
+| `.github/skills/*/SKILL.md` | Інструкції reusable skills і command-skills |
 | `.github/workflows/ci.yml` | Workflow GitHub Actions для трьох платформ, який створює агент |
 | `package.json` | Опис Node.js-проєкту та npm scripts; виконує роль системи складання замість `CMakeLists.txt` з прикладу методички |
 | `ci.sh`, `ci.bat` | Кросплатформні локальні CI-скрипти, які встановлюють залежності, запускають тести та створюють executable через `@yao-pkg/pkg` |
@@ -54,7 +53,30 @@
 | `docs/` | Документація архітектури та журнал взаємодії з AI |
 | `scripts/check.js` | Незмінний інструмент команди `check`, який друкує PASS/FAIL і повертає код результату |
 
-Copilot використовує `.github/agents/*.agent.md` для агента, `.github/prompts/*.prompt.md` для commands і `.github/skills/*/SKILL.md` для skills.
+Copilot використовує `.github/agents/*.agent.md` для агента, а `.github/skills/*/SKILL.md` — для reusable skills і commands.
+
+## Адаптація до платформи
+
+У поточній версії VS Code Copilot формат prompt files застарів: VS Code показав повідомлення `"6 customizations need an update"`. Тому commands перетворено вбудованою міграцією **Convert Prompt to Skills** на command-skills, які користувач викликає через `/`.
+
+Розмежування таке: reusable skills (`project-scaffold`, `build-and-test`, `github-actions`) описують, **як** виконувати роботу; command-skills (`git-init`, `create-project`, `create-build`, `create-actions`, `check`, `init`) описують, **що** запускає користувач.
+
+| Роль за методичкою | Файл |
+|---|---|
+| Reusable skill `project-scaffold` | `.github/skills/project-scaffold/SKILL.md` |
+| Reusable skill `build-and-test` | `.github/skills/build-and-test/SKILL.md` |
+| Reusable skill `github-actions` | `.github/skills/github-actions/SKILL.md` |
+| Command-skill `git-init` | `.github/skills/git-init/SKILL.md` |
+| Command-skill `create-project` | `.github/skills/create-project/SKILL.md` |
+| Command-skill `create-build` | `.github/skills/create-build/SKILL.md` |
+| Command-skill `create-actions` | `.github/skills/create-actions/SKILL.md` |
+| Command-skill `check` | `.github/skills/check/SKILL.md` |
+| Command-skill `init` | `.github/skills/init/SKILL.md` |
+| Manifest агента | `.github/agents/build-engineer.agent.md` |
+| Workflow | `.github/workflows/ci.yml` |
+| Перевірка | `scripts/check.js` |
+
+Історичним джерелом міграції були prompt files у `.github/prompts/*.prompt.md`; у поточній структурі їх немає. Вбудована команда VS Code `/init` (`Initialize Copilot instructions for this repository`) має ту саму назву, тому у списку `/` треба вибирати `/init` з описом **«Оркеструє п'ять команд build-engineer у визначеному порядку»**.
 
 ## Схема взаємодії
 

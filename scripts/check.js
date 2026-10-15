@@ -77,7 +77,7 @@ check("skills", () => {
 
 check("commands", () => {
   for (const commandName of ["git-init", "create-project", "create-build", "create-actions", "check", "init"]) {
-    const file = `.github/prompts/${commandName}.prompt.md`;
+    const file = `.github/skills/${commandName}/SKILL.md`;
     if (!exists(file)) return `${file} відсутній`;
     const content = read(file);
     if (!/^description:\s*.+$/m.test(content)) return `${file}: відсутній description`;
@@ -89,11 +89,11 @@ check("commands", () => {
 });
 
 check("порядок init", () => {
-  const content = read(".github/prompts/init.prompt.md");
+  const content = read(".github/skills/init/SKILL.md");
   const order = ["git-init", "create-project", "create-build", "create-actions", "check"];
   let previous = -1;
   for (const name of order) {
-    const current = content.indexOf(`.github/prompts/${name}.prompt.md`);
+    const current = content.indexOf(`.github/skills/${name}/SKILL.md`);
     if (current <= previous) return "commands згадані не в правильному порядку";
     previous = current;
   }

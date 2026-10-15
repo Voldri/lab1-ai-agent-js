@@ -1,8 +1,8 @@
 ---
-description: "Перевіряє повноту проєкту без змін і звітує про кожну перевірку."
-agent: build-engineer
+name: check
+description: Перевіряє повноту проєкту без змін і звітує про кожну перевірку.
+disable-model-invocation: true
 ---
-
 # check
 
 ## Передумови

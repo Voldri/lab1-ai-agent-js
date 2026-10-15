@@ -1,8 +1,8 @@
 ---
-description: "Створює workflow GitHub Actions через skill github-actions після локальної збірки."
-agent: build-engineer
+name: create-actions
+description: Створює workflow GitHub Actions через skill github-actions після локальної збірки.
+disable-model-invocation: true
 ---
-
 # create-actions
 
 ## Передумови

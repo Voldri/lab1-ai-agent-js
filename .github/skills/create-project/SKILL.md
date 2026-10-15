@@ -1,8 +1,8 @@
 ---
-description: "Створює початковий JavaScript-каркас hello через skill project-scaffold."
-agent: build-engineer
+name: create-project
+description: Створює початковий JavaScript-каркас hello через skill project-scaffold.
+disable-model-invocation: true
 ---
-
 # create-project
 
 ## Передумови
