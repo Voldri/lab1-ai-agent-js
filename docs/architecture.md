@@ -18,12 +18,12 @@
 
 | Command | Передумови | Результат |
 |---|---|---|
-| `git-init` | Відкрито корінь репозиторію | Перевірено репозиторій, створено або оновлено `.gitignore` без дублювання рядків і показано `git status` |
-| `create-project` | Виконано `git-init` | Створено ідемпотентний каркас JavaScript/Node.js-проєкту `hello`: `src/hello.js`, каталоги `src/`, `tests/`, `docs/` і `.gitignore`; README лише перевірено, без тесту та `package.json` |
-| `create-build` | Наявний `src/hello.js` | Додано `package.json` з npm scripts, функцію `add(a, b)`, тест `BasicAddition` у `tests/basic-addition.test.js`, lockfile, `ci.sh`, `ci.bat` і локальну збірку через `@yao-pkg/pkg` у `build/hello` або `build/hello.exe` |
-| `create-actions` | Працює локальна збірка і тести | Додано workflow GitHub Actions для трьох операційних систем |
-| `check` | Виконано попередні етапи | Без зміни проєкту пройдено всі перевірки структури, manifest, skills, commands, конфігурації, складання, тестів і YAML workflow; показано PASS/FAIL для кожної перевірки, пропущені перевірки не вважаються успішними |
-| `init` | Доступний агент `build-engineer` | Послідовно виконано `git-init` → `create-project` → `create-build` → `create-actions` → `check` |
+| `git-init` | `.github/prompts/git-init.prompt.md`; Git-репозиторій | Перевірено репозиторій і гілку, ідемпотентно оновлено `.gitignore`, показано `git status` |
+| `create-project` | `.github/prompts/create-project.prompt.md`; успішний `git-init`, Node.js >= 20 | Виконано `project-scaffold` для JavaScript-проєкту `hello` |
+| `create-build` | `.github/prompts/create-build.prompt.md`; `src/hello.js` | Виконано `build-and-test`, локальну збірку та перевірено `CI OK` |
+| `create-actions` | `.github/prompts/create-actions.prompt.md`; локальний `CI OK` | Виконано `github-actions` і YAML-перевірку workflow |
+| `check` | `.github/prompts/check.prompt.md`; готовий проєкт | `scripts/check.js` без змін у проєкті звітує про всі структурні, тестові, build, workflow та security-перевірки |
+| `init` | `.github/prompts/init.prompt.md`; агент `build-engineer`, гілка `feature/...` | Оркеструє п'ять commands у порядку `git-init` → `create-project` → `create-build` → `create-actions` → `check` |
 
 ## Дані між етапами
 
@@ -52,6 +52,7 @@
 | `build/hello` або `build/hello.exe` | Результат локальної збірки, який не додається до Git |
 | `.gitignore` | Виключення залежностей, результатів збірки, логів і локальних налаштувань |
 | `docs/` | Документація архітектури та журнал взаємодії з AI |
+| `scripts/check.js` | Незмінний інструмент команди `check`, який друкує PASS/FAIL і повертає код результату |
 
 Copilot використовує `.github/agents/*.agent.md` для агента, `.github/prompts/*.prompt.md` для commands і `.github/skills/*/SKILL.md` для skills.
 
