@@ -10,17 +10,17 @@
 
 | Skill | Входи | Виходи |
 |---|---|---|
-| `project-scaffold` | Мова JavaScript і назва проєкту `hello` | Мінімальний Hello World у `src/hello.js`, README, каталоги `src/`, `tests/`, `docs/` і початковий `.gitignore`; перевірка вихідного файлу та команди запуску |
-| `build-and-test` | Структура проєкту та вихідний код | `package.json` з npm scripts, функція `add(a, b)`, тест `BasicAddition` у `tests/hello.test.js`, `ci.sh`, `ci.bat`, devDependency `@yao-pkg/pkg`, файл `build/hello` або `build/hello.exe` |
-| `github-actions` | Проєкт, локальні CI-скрипти та вимоги до платформ | `.github/workflows/ci.yml` з однією job і matrix для `ubuntu-latest`, `windows-latest`, `macos-latest`, яка запускає лише `ci.sh` або `ci.bat` і зберігає executable як artifact |
+| `project-scaffold` | Мова JavaScript і назва проєкту `hello` | Ідемпотентні каталоги `src/`, `tests/`, `docs/`, `src/hello.js` з Hello World і правила `.gitignore`; README.md лише перевіряється, тест і `package.json` не створюються |
+| `build-and-test` | Наявний `src/hello.js` | `src/add.js`, `tests/basic-addition.test.js` з `BasicAddition`, `package.json`, локальні devDependencies, `package-lock.json`, `.gitattributes`, `ci.sh`, `ci.bat` і збірка `build/hello` або `build/hello.exe` |
+| `github-actions` | Наявні `ci.sh` і `ci.bat`, які завершуються `CI OK` | `.github/workflows/ci.yml` з однією job і matrix для `ubuntu-latest`, `windows-latest`, `macos-latest`, яка запускає лише локальний скрипт і зберігає executable як artifact |
 
 ## Commands
 
 | Command | Передумови | Результат |
 |---|---|---|
 | `git-init` | Відкрито корінь репозиторію | Перевірено репозиторій, створено або оновлено `.gitignore` без дублювання рядків і показано `git status` |
-| `create-project` | Виконано `git-init` | Створено мінімальний JavaScript/Node.js-проєкт `hello`: `src/hello.js`, README, каталоги `src/`, `tests/`, `docs/` і початковий `.gitignore`; без тесту |
-| `create-build` | Створено проєкт і його вихідний код | Додано `package.json` з npm scripts, функцію `add(a, b)`, тест `BasicAddition` у `tests/hello.test.js`, `ci.sh`, `ci.bat` і локальну збірку через `@yao-pkg/pkg` у `build/hello` або `build/hello.exe` |
+| `create-project` | Виконано `git-init` | Створено ідемпотентний каркас JavaScript/Node.js-проєкту `hello`: `src/hello.js`, каталоги `src/`, `tests/`, `docs/` і `.gitignore`; README лише перевірено, без тесту та `package.json` |
+| `create-build` | Наявний `src/hello.js` | Додано `package.json` з npm scripts, функцію `add(a, b)`, тест `BasicAddition` у `tests/basic-addition.test.js`, lockfile, `ci.sh`, `ci.bat` і локальну збірку через `@yao-pkg/pkg` у `build/hello` або `build/hello.exe` |
 | `create-actions` | Працює локальна збірка і тести | Додано workflow GitHub Actions для трьох операційних систем |
 | `check` | Виконано попередні етапи | Без зміни проєкту пройдено всі перевірки структури, manifest, skills, commands, конфігурації, складання, тестів і YAML workflow; показано PASS/FAIL для кожної перевірки, пропущені перевірки не вважаються успішними |
 | `init` | Доступний агент `build-engineer` | Послідовно виконано `git-init` → `create-project` → `create-build` → `create-actions` → `check` |
